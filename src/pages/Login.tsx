@@ -1,11 +1,32 @@
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../components/LoginForm.tsx'
+import SignUpForm from '../components/SignUpForm.tsx'
+import {AuthContext} from '../components/context.tsx'
+import {useState, useContext} from 'react'
+import {Navigate} from "react-router-dom"
 
 export default function Login() {
+  const [showForm, setShowForm] = useState(false)
+  const {isAuthenticated} = useContext(AuthContext)
+
+  const handleSignUp = () => {
+    setShowForm(false)
+  }
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
+
   return (
     <>
-      <h2>Login Page</h2>
-      <LoginForm />
-      <button>sign up</button>
+      {showForm ?
+        <SignUpForm onSignUp={handleSignUp} />
+        :
+        <>
+          <h2>Login Page</h2>
+          <LoginForm />
+          <button onClick={() => setShowForm(true)}>Sign up</button>
+        </>
+      }
     </>
   )
 }

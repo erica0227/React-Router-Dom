@@ -1,14 +1,23 @@
-import { Profile, Sidebar } from '../components/Components';
-
-interface DashboardProps {}
+import {useContext} from 'react'
+import {AuthContext} from '../components/context.tsx'
+import {Navigate} from "react-router-dom"
 
 export default function Dashboard() {
+  const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext)
+
+  const handleLogout = () => {
+    console.log('User logged out')
+    setIsAuthenticated(false)
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />
+  }
+
   return (
     <div>
-      <Sidebar />
-      <Profile />
-      {/*<h2>Dashboard Page</h2>*/}
-      {/*<button>log out</button>*/}
+      <h2>Dashboard Page</h2>
+      <button onClick={handleLogout}>log out</button>
     </div>
   );
 }
