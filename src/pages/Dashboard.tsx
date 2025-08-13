@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 import {AuthContext} from '../components/context.tsx'
-import {Navigate} from "react-router-dom"
+import {Navigate, Outlet} from "react-router-dom"
 
 export default function Dashboard() {
   const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext)
@@ -18,6 +18,7 @@ export default function Dashboard() {
     <div>
       <h2>Dashboard Page</h2>
       <button onClick={handleLogout}>log out</button>
+      <Outlet/>
     </div>
   );
 }

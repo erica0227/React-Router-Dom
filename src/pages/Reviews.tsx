@@ -2,7 +2,7 @@ import {useContext} from 'react'
 import {AuthContext} from '../components/context.tsx'
 import {Navigate} from "react-router-dom"
 
-export default function Users() {
+export default function Reviews() {
   const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext)
 
   const handleLogout = () => {
@@ -16,7 +16,7 @@ export default function Users() {
 
   return (
     <div>
-      <h2>User Page</h2>
+      <h2>Review Page</h2>
       <button onClick={handleLogout}>log out</button>
     </div>
   );

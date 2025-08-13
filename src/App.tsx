@@ -1,29 +1,41 @@
 import './App.css'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {HashRouter as Router, Routes, Route} from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
-import Users from './pages/Users'
+import Reviews from './pages/Reviews'
 import Login from './pages/Login'
 import NoPage from './pages/NoPage'
+import DashboardLayout from './components/DashboardLayout'
 import {AuthWrapper} from './components/AuthWrapper'
 import {AuthContext} from './components/context'
+import {Provider} from "./components/ui/provider"
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    () => localStorage.getItem('isAuthenticated') === "true"
+  )
+
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", String(isAuthenticated));
+  }, [isAuthenticated]);
 
   return (
-    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
-      <Router>
-        <Routes>
-          <Route index element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NoPage />} />
-          <Route element={<AuthWrapper />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/users" element={<Users />} />
-          </Route>
-        </Routes>
-      </Router>
-    </AuthContext.Provider>
+    <Provider>
+      <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
+        <Router>
+          <Routes>
+            <Route index element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NoPage />} />
+            <Route element={<AuthWrapper />}>
+              <Route path="/dashboard" element={<DashboardLayout/>}>
+                <Route index element={<Dashboard/>}/>
+                <Route path="reviews" element={<Reviews/>}/>
+              </Route>
+            </Route>
+          </Routes>
+        </Router>
+      </AuthContext.Provider>
+    </Provider>
   )
 }
