@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {AuthContext} from "./context";
+import {AuthContext} from "./Context.tsx";
 
 export default function SignUpForm({onSignUp}: {onSignUp: () => void}) {
   const {setIsAuthenticated} = useContext(AuthContext)

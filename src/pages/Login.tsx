@@ -1,6 +1,6 @@
 import LoginForm from '../components/LoginForm.tsx'
 import SignUpForm from '../components/SignUpForm.tsx'
-import {AuthContext} from '../components/context.tsx'
+import {AuthContext} from '../components/Context.tsx'
 import {useState, useContext} from 'react'
 import {Navigate} from "react-router-dom"
 

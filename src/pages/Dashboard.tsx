@@ -1,6 +1,7 @@
 import {useContext} from 'react'
-import {AuthContext} from '../components/context.tsx'
+import {AuthContext} from '../components/Context.tsx'
 import {Navigate, Outlet} from "react-router-dom"
+import {Heading} from "@chakra-ui/react"
 
 export default function Dashboard() {
   const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext)
@@ -16,7 +17,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h2>Dashboard Page</h2>
+      <Heading>Dashboard Page</Heading>
       <button onClick={handleLogout}>log out</button>
       <Outlet/>
     </div>

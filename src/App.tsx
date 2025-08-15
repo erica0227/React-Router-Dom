@@ -1,13 +1,13 @@
 import './App.css'
 import {useState, useEffect} from 'react'
-import {HashRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
-import Reviews from './pages/Reviews'
+import Grid from './pages/Grid.tsx'
 import Login from './pages/Login'
 import NoPage from './pages/NoPage'
-import DashboardLayout from './components/DashboardLayout'
+import DashboardLayout from './layout/DashboardLayout.tsx'
 import {AuthWrapper} from './components/AuthWrapper'
-import {AuthContext} from './components/context'
+import {AuthContext} from './components/Context.tsx'
 import {Provider} from "./components/ui/provider"
 
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
             <Route element={<AuthWrapper />}>
               <Route path="/dashboard" element={<DashboardLayout/>}>
                 <Route index element={<Dashboard/>}/>
-                <Route path="reviews" element={<Reviews/>}/>
+                <Route path="reviews" element={<Grid/>}/>
               </Route>
             </Route>
           </Routes>
