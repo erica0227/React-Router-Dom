@@ -2,39 +2,52 @@ import './App.css'
 import {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
-import Grid from './pages/Grid.tsx'
+import Reviews from './pages/Reviews.tsx'
 import Login from './pages/Login'
 import NoPage from './pages/NoPage'
-import DashboardLayout from './layout/DashboardLayout.tsx'
+import RootLayout from './layout/RootLayout.tsx'
 import {AuthWrapper} from './components/AuthWrapper'
-import {AuthContext} from './components/Context.tsx'
+import {AuthContext} from './context/AuthContext.tsx'
+import {NavContext} from "./context/NavContext";
 import {Provider} from "./components/ui/provider"
+import UserList from "./pages/UserList.tsx";
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    () => localStorage.getItem('isAuthenticated') === "true"
+  const [isAuthenticated, setIsAuthenticated] = useState(() =>
+    localStorage.getItem('isAuthenticated') === "true"
   )
 
   useEffect(() => {
     localStorage.setItem("isAuthenticated", String(isAuthenticated));
   }, [isAuthenticated]);
 
+  const [pageTitle, setPageTitle] = useState(() =>
+    localStorage.getItem("pageTitle") || "Dashboard"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("pageTitle", pageTitle);
+  }, [pageTitle]);
+
   return (
     <Provider>
       <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
-        <Router>
-          <Routes>
-            <Route index element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="*" element={<NoPage />} />
-            <Route element={<AuthWrapper />}>
-              <Route path="/dashboard" element={<DashboardLayout/>}>
-                <Route index element={<Dashboard/>}/>
-                <Route path="reviews" element={<Grid/>}/>
+        <NavContext.Provider value={{pageTitle, setPageTitle}}>
+          <Router>
+            <Routes>
+              <Route index element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="*" element={<NoPage />} />
+              <Route element={<AuthWrapper />}>
+                <Route path="/" element={<RootLayout/>}>
+                  <Route path="dashboard" element={<Dashboard/>}/>
+                  <Route path="reviews" element={<Reviews/>}/>
+                  <Route path="users" element={<UserList/>}/>
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-        </Router>
+            </Routes>
+          </Router>
+        </NavContext.Provider>
       </AuthContext.Provider>
     </Provider>
   )

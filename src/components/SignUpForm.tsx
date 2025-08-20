@@ -1,12 +1,24 @@
 import {useContext} from "react";
-import {AuthContext} from "./Context.tsx";
+import {AuthContext} from "../context/AuthContext.tsx";
 
-export default function SignUpForm({onSignUp}: {onSignUp: () => void}) {
+type User = {
+  name: string
+  password: string
+}
+
+type SignUpFormProps = {
+  onSignUp: () => void
+  users: User[]
+  setUsers: React.Dispatch<React.SetStateAction<User[]>>
+}
+
+export default function SignUpForm({onSignUp, users, setUsers}: SignUpFormProps) {
   const {setIsAuthenticated} = useContext(AuthContext)
 
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsAuthenticated(true)
+    setUsers([...users])
     console.log('User logged in')
     onSignUp()
   }

@@ -1,6 +1,6 @@
 import LoginForm from '../components/LoginForm.tsx'
 import SignUpForm from '../components/SignUpForm.tsx'
-import {AuthContext} from '../components/Context.tsx'
+import {AuthContext} from '../context/AuthContext.tsx'
 import {useState, useContext} from 'react'
 import {Navigate} from "react-router-dom"
 
@@ -16,14 +16,16 @@ export default function Login() {
     return <Navigate to="/dashboard" />;
   }
 
+  const [users, setUsers] = useState([]);
+
   return (
     <>
       {showForm ?
-        <SignUpForm onSignUp={handleSignUp} />
+        <SignUpForm onSignUp={handleSignUp}  users={users} setUsers={setUsers}/>
         :
         <>
           <h2>Login Page</h2>
-          <LoginForm />
+          <LoginForm users={users} />
           <button onClick={() => setShowForm(true)}>Sign up</button>
         </>
       }

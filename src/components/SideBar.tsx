@@ -2,13 +2,15 @@ import {Stack, HStack, Icon, Flex, Text, Button, Spacer} from "@chakra-ui/react"
 import {NavLink} from "react-router-dom";
 import {RiHome5Fill, RiSettingsFill} from "react-icons/ri";
 import {useContext} from 'react'
-import {AuthContext} from '../components/Context.tsx'
+import {AuthContext} from '../context/AuthContext.tsx'
+import {NavContext} from "../context/NavContext"
 import {Navigate} from "react-router-dom"
 import {FaQuoteLeft, FaHashtag, FaUser, FaDiceFive} from "react-icons/fa6";
 import {IoNotifications, IoLogOut} from "react-icons/io5";
 
 export default function SideBar() {
   const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext)
+  const {setPageTitle} = useContext(NavContext)
 
   const handleLogout = () => {
     console.log('User logged out')
@@ -20,13 +22,13 @@ export default function SideBar() {
   }
 
   const menuItems = [
-    { to: "/", icon: RiHome5Fill, label: "Dashboard" },
-    { to: "/dashboard/reviews", icon: FaQuoteLeft, label: "Reviews" },
+    { to: "/dashboard", icon: RiHome5Fill, label: "Dashboard" },
+    { to: "/reviews", icon: FaQuoteLeft, label: "Reviews" },
     { to: "/", icon: FaHashtag, label: "Keywords" },
     { to: "/", icon: FaDiceFive, label: "Web crawler" },
     { to: "/", icon: IoNotifications, label: "Notifications" },
     { to: "/", icon: RiSettingsFill, label: "Settings" },
-    { to: "/", icon: FaUser, label: "User management" },
+    { to: "/users", icon: FaUser, label: "User management" },
   ];
 
   return (
@@ -40,7 +42,7 @@ export default function SideBar() {
           Logo
         </Text>
         {menuItems.map(item => (
-          <NavLink key={item.label} to={item.to}>
+          <NavLink key={item.label} to={item.to} onClick={() => setPageTitle(item.label)}>
             <HStack>
               <Icon as={item.icon} boxSize="1.5rem" />
               {item.label}
@@ -49,7 +51,7 @@ export default function SideBar() {
         ))}
       </Stack>
 
-      <Spacer />
+      <Spacer minWidth="2.625rem"/>
 
       <HStack>
         <Icon as={IoLogOut} boxSize="1.5rem"/>

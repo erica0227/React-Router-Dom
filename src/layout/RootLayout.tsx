@@ -3,7 +3,7 @@ import SideBar from "../components/SideBar.tsx"
 import NavBar from "../components/NavBar"
 import {Grid, GridItem} from "@chakra-ui/react"
 
-export default function DashboardLayout() {
+export default function RootLayout() {
   return (
     <Grid templateColumns="repeat(6, 1fr)" bg="#F6F6F8">
       <GridItem
