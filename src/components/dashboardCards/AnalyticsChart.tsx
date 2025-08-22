@@ -1,5 +1,5 @@
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
-import {Flex, Text, Spacer, Heading, HStack, Box} from "@chakra-ui/react";
+import {Flex, Text, Heading, HStack, Box, Circle, useBreakpointValue} from "@chakra-ui/react";
 
 const analyticsData = [
   { month: "Jan", listingsRemoved: 5000, noticesSent: 6000, noticesRejected: 1000 },
@@ -17,58 +17,60 @@ const analyticsData = [
 ];
 
 export default function AnalyticsChart() {
+
   return (
-    <Flex bg="white" borderRadius="24px" width="100%" height={330} direction="column" p={3}>
-      <Flex p={4}>
-        <Heading>
+    <Flex
+      bg="white"
+      borderRadius="24px"
+      width="100%"
+      height="100%"
+      direction="column"
+      p={{ base: "1", md: "3" }}
+    >
+      <Flex p={3} px={5} direction={{ base: "column", md: "row" }} gap={{ base: "1", md: "0" }} justify="space-between">
+        <Heading textStyle={{ base: "lg", md: "xl" }}>
           Analytics
         </Heading>
-        <Spacer />
-        <HStack>
+
+        <HStack gap={{ base: 1, md: 2, lg: 6 }}>
           <HStack>
-            <Box
-              w="15px"
-              h="15px"
-              bg="#D7F0FC"
-              borderRadius="full"
-            />
-            <Text textStyle="sm">Listings Removed</Text>
+            <Circle size={{ base: "12px", md: "15px" }} bg="#D7F0FC" />
+            <Text textStyle={{ base: "xs", md: "sm" }}>Listings Removed</Text>
           </HStack>
           <HStack>
-            <Box
-              w="15px"
-              h="15px"
-              bg="#CDEFD9"
-              borderRadius="full"
-            />
-            <Text textStyle="sm">Notices Sent</Text>
+            <Circle size={{ base: "12px", md: "15px" }} bg="#CDEFD9" />
+            <Text textStyle={{ base: "xs", md: "sm" }}>Notices Sent</Text>
           </HStack>
           <HStack>
-            <Box
-              w="15px"
-              h="15px"
-              bg="#FEA4A3"
-              borderRadius="full"
-            />
-            <Text textStyle="sm">Notices Rejected</Text>
+            <Circle size={{ base: "12px", md: "15px" }} bg="#FEA4A3" />
+            <Text textStyle={{ base: "xs", md: "sm" }}>Notices Rejected</Text>
           </HStack>
         </HStack>
       </Flex>
-      <ResponsiveContainer width="98%" height="100%">
-        <BarChart
-          width={800}
-          height={300}
-          data={analyticsData}
-        >
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip cursor={{fill: "transparent"}}/>
-          <Bar dataKey="listingsRemoved" fill="#D7F0FC" />
-          <Bar dataKey="noticesSent" fill="#CDEFD9" />
-          <Bar dataKey="noticesRejected" fill="#FEA4A3" />
-        </BarChart>
-      </ResponsiveContainer>
+      <Box flex="1" minH="190px" maxH="400px" pr={5}>
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            width={800}
+            height={300}
+            data={analyticsData}
+          >
+            <CartesianGrid strokeDasharray="10 5" vertical={false} stroke="#E2E8F0"/>
+            <XAxis
+              dataKey="month"
+              axisLine={{stroke: "#E2E8F0"}}
+              tickLine={false}
+            />
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip cursor={{fill: "transparent"}}/>
+            <Bar dataKey="listingsRemoved" fill="#D7F0FC" barSize={useBreakpointValue({ base: 3, md: 8 })}/>
+            <Bar dataKey="noticesSent" fill="#CDEFD9" barSize={useBreakpointValue({ base: 3, md: 8 })}/>
+            <Bar dataKey="noticesRejected" fill="#FEA4A3" barSize={useBreakpointValue({ base: 3, md: 8 })}/>
+          </BarChart>
+        </ResponsiveContainer>
+      </Box>
     </Flex>
   );
 }

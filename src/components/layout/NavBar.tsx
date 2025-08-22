@@ -1,7 +1,7 @@
 import {Flex, Heading, VStack, Text, Spacer, HStack, Avatar} from "@chakra-ui/react"
-import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBar.tsx";
 import {useContext} from "react"
-import {NavContext} from "../context/NavContext"
+import {NavContext} from "../../context/NavContext.tsx"
 
 export default function NavBar() {
   const {pageTitle} = useContext(NavContext)
@@ -10,11 +10,18 @@ export default function NavBar() {
     <Flex
       as="nav"
       alignItems="center"
-      py={2}
-      gap={6}
+      pt={2}
+      pb={8}
+      gap={8}
     >
-      <Heading size="3xl">{pageTitle}</Heading>
-      <Spacer/>
+      <Heading
+        size="3xl"
+        display={{ base: "none", md: "block"}}
+      >
+        {pageTitle}
+      </Heading>
+
+      <Spacer display={{ base: "none", md: "block"}}/>
 
       <SearchBar />
       <HStack>

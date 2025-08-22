@@ -1,4 +1,4 @@
-import {Flex, Heading, HStack, Spacer, Stack, StackSeparator, Text} from "@chakra-ui/react";
+import {Flex, Heading, HStack, Spacer, Stack, StackSeparator, Text, useBreakpointValue} from "@chakra-ui/react";
 
 const notifications = [
   {
@@ -29,21 +29,21 @@ const notifications = [
 
 export default function FakeSellerCard() {
   return (
-    <Flex bg="white" borderRadius="24px" width="100%" direction="column" p={5} gap={5}>
-      <Flex>
-        <Heading>Notifications of Take Downs</Heading>
+    <Flex bg="white" borderRadius="24px" width="100%" direction="column" p={6} gap={5}>
+      <HStack>
+        <Heading textStyle={{ base: "lg", md: "xl" }}>{useBreakpointValue({base:"Notifications", md:"Notifications of Take Downs"})}</Heading>
         <Spacer />
-        <Text>View all</Text>
-      </Flex>
+        <Text textStyle={{ base: "sm", md: "md" }}>View all</Text>
+      </HStack>
       <Stack separator={<StackSeparator />} gap={3}>
         {notifications.map(item => (
           <Flex key={item.id} gap={3} alignItems="center" justifyContent="space-between">
-            <HStack>
-              <Text>{item.title}</Text>
-              <Text textStyle="sm" color="gray.500">{item.url}</Text>
+            <HStack flex="1">
+              <Text textStyle={{ base: "sm", md: "md" }}>{item.title}</Text>
+              <Text textStyle="sm" color="gray.500" display={{ base: "none", lg: "block" }}>{item.url}</Text>
             </HStack>
-            <Spacer />
-            <Text textStyle="sm" color="gray.500">{item.timeAgo}</Text>
+
+            <Text textStyle={{ base: "xs", md: "sm" }} color="gray.500">{item.timeAgo}</Text>
           </Flex>
         ))}
 

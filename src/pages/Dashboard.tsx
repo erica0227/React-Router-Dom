@@ -10,7 +10,7 @@ import {Box, Button, Flex, Grid, GridItem, HStack, Spacer, Stack, Text} from "@c
 export default function Dashboard() {
   return (
     <Box>
-      <Flex alignItems="center" py={5}>
+      <Flex alignItems="center" pb={5} display={{ base: "none", md: "flex" }}>
         <Text>Wed, Oct 27</Text>
         <Spacer />
         <HStack>
@@ -22,30 +22,30 @@ export default function Dashboard() {
       </Flex>
 
       <Stack gap={6}>
-        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", xl: "repeat(3, 1fr)" }} gap={6} alignItems="stretch">
           <GridItem>
             <TakedownsCard/>
           </GridItem>
           <GridItem>
             <GoodsScrapedCard/>
           </GridItem>
-          <GridItem>
+          <GridItem colSpan={{ base: 1, md: 2, xl: 1 }}>
             <NewNoticesCard/>
           </GridItem>
         </Grid>
-        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-          <GridItem colSpan={2}>
+        <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", xl: "repeat(3, 1fr)" }} gap={6} alignItems="stretch">
+          <GridItem colSpan={{ base: 1, md: 2 }}>
             <AnalyticsChart/>
           </GridItem>
-          <GridItem colSpan={1}>
+          <GridItem colSpan={{ base: 1, md: 2, xl: 1 }}>
             <FakeSellerCard/>
           </GridItem>
         </Grid>
-        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-          <GridItem colSpan={2}>
+        <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", xl: "repeat(3, 1fr)" }} gap={6}>
+          <GridItem colSpan={{ base: 1, md: 2 }}>
             <NotificationCard/>
           </GridItem>
-          <GridItem colSpan={1}>
+          <GridItem colSpan={{ base: 1, md: 2, xl: 1 }}>
             <TopAdminCard/>
           </GridItem>
         </Grid>

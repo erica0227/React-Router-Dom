@@ -34,7 +34,7 @@ export default function Reviews() {
 
   return (
     <Box>
-      <Flex alignItems="center" py={5}>
+      <Flex alignItems="center" pb={5} display={{ base: "none", md: "flex" }}>
         <Text>Product List</Text>
         <Spacer />
         <HStack>

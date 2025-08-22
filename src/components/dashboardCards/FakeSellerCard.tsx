@@ -1,4 +1,4 @@
-import {Avatar, Flex, Heading, Spacer, Stack, Text} from "@chakra-ui/react";
+import {Avatar, Flex, Heading, HStack, Spacer, Stack, Text} from "@chakra-ui/react";
 
 const fakeSellers = [
   {
@@ -47,30 +47,32 @@ const pickPalette = () => {
 
 export default function FakeSellerCard() {
   return (
-    <Flex bg="white" borderRadius="24px" width="100%" height={330} direction="column" p={5} gap={3}>
-      <Flex>
-        <Heading>Top 5 Fake Sellers</Heading>
+    <Flex bg="white" borderRadius="24px" width="full" height="full" direction="column" p={6} gap={4}>
+      <HStack>
+        <Heading textStyle={{ base: "lg", md: "xl" }}>Top 5 Fake Sellers</Heading>
         <Spacer />
-        <Text>View all</Text>
-      </Flex>
-      <Stack>
+        <Text textStyle={{ base: "sm", md: "md" }}>View all</Text>
+      </HStack>
+
+      <Stack gap={3}>
         {fakeSellers.map(seller => (
           <Flex key={seller.id} gap={3} alignItems="center" justifyContent="space-between">
+            <HStack gap={3} flex="1">
               <Avatar.Root borderRadius="xl" colorPalette={pickPalette()}>
                 <Avatar.Fallback/>
                 <Avatar.Image src={seller.avatar} />
               </Avatar.Root>
               <Stack gap="0">
-                <Text fontWeight="medium">{seller.name}</Text>
-                <Text color="fg.muted" textStyle="sm">
+                <Text fontWeight="medium" textStyle={{ base: "sm", md: "md" }}>{seller.name}</Text>
+                <Text color="fg.muted" textStyle={{ base: "xs", md: "sm" }}>
                   {seller.company}
                 </Text>
               </Stack>
-              <Spacer />
-              <Text color="gray.600">Listing #{seller.listing}</Text>
+            </HStack>
+
+            <Text color="gray.600" textStyle={{ base: "sm", md: "md" }}>Listing #{seller.listing}</Text>
           </Flex>
         ))}
-
       </Stack>
     </Flex>
   )

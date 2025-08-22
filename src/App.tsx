@@ -6,7 +6,7 @@ import Reviews from './pages/Reviews.tsx'
 import Login from './pages/Login'
 import NoPage from './pages/NoPage'
 import RootLayout from './layout/RootLayout.tsx'
-import {AuthWrapper} from './components/AuthWrapper'
+import {AuthWrapper} from './components/ui/AuthWrapper.tsx'
 import {AuthContext} from './context/AuthContext.tsx'
 import {NavContext} from "./context/NavContext";
 import {Provider} from "./components/ui/provider"

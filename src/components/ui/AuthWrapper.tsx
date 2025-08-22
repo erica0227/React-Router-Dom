@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {Navigate, Outlet} from "react-router-dom";
-import {AuthContext} from "../context/AuthContext.tsx";
+import {AuthContext} from "../../context/AuthContext.tsx";
 
 export function AuthWrapper() {
   const {isAuthenticated} = useContext(AuthContext)

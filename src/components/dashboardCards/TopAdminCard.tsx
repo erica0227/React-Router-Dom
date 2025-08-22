@@ -2,13 +2,13 @@ import {Avatar, Box, Button, Flex, Heading, HStack, Spacer, Stack, Text} from "@
 
 export default function FakeSellerCard() {
   return (
-      <Flex bg="white" borderRadius="24px" width="100%" direction="column" p={5} gap={3}>
-        <Flex>
-          <Heading>Top Admin</Heading>
+      <Flex bg="white" borderRadius="24px" width="100%" direction="column" p={6} gap={3}>
+        <HStack>
+          <Heading textStyle={{ base: "lg", md: "xl" }}>Top Admin</Heading>
           <Spacer />
-          <Text>View all</Text>
-        </Flex>
-        <Flex>
+          <Text textStyle={{ base: "sm", md: "md" }}>View all</Text>
+        </HStack>
+        <Flex gap={{ base: "5", md: "7" }}>
           <Stack gap={1}>
             <Box border="6px solid #EDF2F7" borderRadius="full">
               <Avatar.Root boxSize="100px">
@@ -17,13 +17,13 @@ export default function FakeSellerCard() {
               </Avatar.Root>
             </Box>
             <Stack gap={0} align="center">
-              <Text fontWeight="medium">Carl Meadows</Text>
-              <Text color="fg.muted" textStyle="sm">Admin</Text>
+              <Text fontWeight="medium" textStyle={{ base: "sm", md: "md" }}>Carl Meadows</Text>
+              <Text color="fg.muted" textStyle={{ base: "xs", md: "sm" }}>Admin</Text>
             </Stack>
           </Stack>
-          <Spacer />
+
           <Stack
-            minW="230px"
+            w="full"
             gap={3}
             justify="center"
           >
@@ -33,11 +33,12 @@ export default function FakeSellerCard() {
               minH={14}
               align="center"
               justify="center"
+              p={3}
             >
-              <Text color="gray.600">Notices Reviewed:</Text>
-              <Text fontWeight="bold" textStyle="lg">23,353</Text>
+              <Text textStyle={{ base: "xs", md: "sm" }} color="gray.600">Notices Reviewed:</Text>
+              <Text fontWeight="bold" textStyle={{ base: "md", md: "lg" }}>23,353</Text>
             </HStack>
-            <Button borderRadius="xl" minH={14}>
+            <Button fontSize={{ base: "sm", md: "md" }} fontWeight="bold" borderRadius="xl" bg="#6F6CF3" minH={14}>
               View Details
             </Button>
           </Stack>
